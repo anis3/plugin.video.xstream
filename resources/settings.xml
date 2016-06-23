@@ -18,10 +18,16 @@
 	<setting label="AnimeLoads" type="lsep" />
 	<setting default="false" id="plugin_anime-loads_org" label="AnimeLoads" type="bool" />
 	<setting label="BurningSeries" type="lsep" />
-	<setting default="false" id="plugin_bs_to" label="BurningSeries" type="bool" />
+	<setting default="false" id="plugin_burning_series_org" label="BurningSeries" type="bool" />
+	<setting label="CineDoam" type="lsep" />
+	<setting default="false" id="plugin_cine_do_am" label="CineDoam" type="bool" />
+	<setting label="Cine" type="lsep" />
+	<setting default="false" id="plugin_cine_to" label="Cine" type="bool" />
 	<setting label="DirectDownLoad" type="lsep" />
 	<setting default="false" id="plugin_ddl_me" label="DirectDownLoad" type="bool" />
 	<setting default="de.ddl.me" enable="!eq(-1,false)" id="ddl_me-domain" label="DirectDownLoad domain" type="labelenum" values="de.ddl.me|en.ddl.me" />
+	<setting label="DieFilme" type="lsep" />
+	<setting default="false" id="plugin_diefilme_net" label="DieFilme" type="bool" />
 	<setting label="FilmPalast" type="lsep" />
 	<setting default="false" id="plugin_filmpalast_to" label="FilmPalast" type="bool" />
 	<setting label="Gute Filme" type="lsep" />
