@@ -11,7 +11,7 @@ import re
 
 SITE_IDENTIFIER = 'streamit_ws'
 SITE_NAME = 'StreamIT'
-SITE_ICON = 'streamit_ws.png'
+SITE_ICON = 'streamit.png'
 
 URL_MAIN = 'http://streamit.ws/'
 URL_Kinofilme = URL_MAIN + 'kino'
