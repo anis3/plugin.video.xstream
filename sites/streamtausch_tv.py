@@ -40,7 +40,7 @@ def showGenresList():
         total = len (aResult[1])
         for sUrl, sName in aResult[1]:      
             params.setParam('sUrl', sUrl)
-            oGui.addFolder(cGuiElement(stripHtmlTags(sName), SITE_IDENTIFIER, 'showEntries'), params, True, total)
+            oGui.addFolder(cGuiElement(cUtil().removeHtmlTags(sName), SITE_IDENTIFIER, 'showEntries'), params, True, total)
     oGui.setEndOfDirectory()
 
 def showEntries(entryUrl = False, sGui = False):
@@ -54,7 +54,7 @@ def showEntries(entryUrl = False, sGui = False):
     pattern += '(?:<fieldset[^>]*>.*?Jahr:</b>\s+(\d+).*?</fieldset>.*?)?' # year (opt)
     pattern += '</table>'
     aResult = cParser().parse(sHtmlContent, pattern)
-    
+
     if aResult[0] and aResult[1][0]:
         total = len (aResult[1])
         for sUrl, sName, sThumbnail, sJahr in aResult[1]:
@@ -86,14 +86,14 @@ def showSearchEntries(entryUrl = False, sGui = False):
     pattern += '<a[^>]*href="([^"]*)"[^>]*>(.*?)</a>.*?' # url / title
     pattern += '</div>'
     aResult = cParser().parse(sHtmlContent, pattern)
-    
+
     if not aResult[0]:
         return
-    
+
     total = len (aResult[1])
     for sEntryUrl, sName in aResult[1]:
         if "stuff" not in sEntryUrl: continue
-        oGuiElement = cGuiElement(cUtil().unescape(stripHtmlTags(sName).decode('utf-8')).encode('utf-8'), SITE_IDENTIFIER, 'showHosters')
+        oGuiElement = cGuiElement(cUtil().unescape(cUtil().removeHtmlTags(sName).decode('utf-8')).encode('utf-8'), SITE_IDENTIFIER, 'showHosters')
         params.setParam('entryUrl', sEntryUrl)
         oGui.addFolder(oGuiElement, params, False, total)
 
@@ -109,9 +109,8 @@ def showHosters():
             # diry fix for old iconnames
             if sName == 'putlocker':
                 sName = 'vodlocker'
-            if sName == 'sockshare':   
-                sName = 'shared.sx'
-                
+            elif sName == 'sockshare':   
+                 sName = 'shared.sx'
             hoster = {}
             hoster['link'] = sUrl
             hoster['name'] = sName
@@ -124,20 +123,15 @@ def getHosterUrl(sUrl = False):
     if not sUrl: sUrl = ParameterHandler().getValue('url')
     results = []
     result = {}
-
     # resolve redirect
     if not sUrl.startswith("http"):
         oRequestHandler = cRequestHandler(URL_MAIN + sUrl)
         oRequestHandler.request()
         sUrl = oRequestHandler.getRealUrl()
-            
-    result['streamUrl'] = sUrl
+        result['streamUrl'] = sUrl
     result['resolved'] = False
     results.append(result)
     return results
-
-def stripHtmlTags(strData):
-    return re.compile(r'<.*?>').sub('', strData)
 
 def showSearch():
     oGui = cGui()
